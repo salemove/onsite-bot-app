@@ -9,8 +9,6 @@ import Bot from './Bot';
 
 const store = createStore(reducers, applyMiddleware(thunk));
 
-const bot = new Bot(store);
-
 const createSalemoveBotDiv = () => {
   const div = document.createElement('div');
   div.id = 'salemove-bot';
@@ -20,6 +18,7 @@ const createSalemoveBotDiv = () => {
 };
 
 sm.getApi({version: 'v1'}).then(salemove => {
+  const bot = new Bot(store, salemove);
   render(
     <Provider store={store}>
       <ChatContainer/>

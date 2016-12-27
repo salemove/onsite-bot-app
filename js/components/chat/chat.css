@@ -9,6 +9,18 @@
   text-align: left;
 }
 
+.sm-bot-bot-message::before {
+  content: 'bot: ';
+}
+
+.sm-bot-operator-message {
+  text-align: left;
+}
+
+.sm-bot-operator-message::before {
+  content: 'operator: ';
+}
+
 .sm-bot-visitor-message {
   text-align: right;
 }

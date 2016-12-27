@@ -1,5 +1,4 @@
 import {ACTION_TYPES} from './Constants';
-import R from 'ramda';
 
 const initialState = {
   messages: []

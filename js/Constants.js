@@ -4,5 +4,6 @@ export const ACTION_TYPES = {
 
 export const SENDERS = {
   VISITOR: 'visitor',
-  BOT: 'bot'
+  BOT: 'bot',
+  OPERATOR: 'operator'
 };
