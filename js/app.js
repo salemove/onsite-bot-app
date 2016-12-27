@@ -1,6 +1,12 @@
 import React from 'react';
 import {render} from 'react-dom';
-import Chat from './components/chat/Chat';
+import {createStore, applyMiddleware} from 'redux'
+import {Provider} from 'react-redux';
+import thunk from 'redux-thunk';
+import reducers from './Reducers';
+import ChatContainer from './components/chat/ChatContainer';
+
+const store = createStore(reducers, applyMiddleware(thunk));
 
 const createSalemoveBotDiv = () => {
   const div = document.createElement('div');
@@ -11,5 +17,10 @@ const createSalemoveBotDiv = () => {
 };
 
 sm.getApi({version: 'v1'}).then(salemove => {
-  render(<Chat/>, createSalemoveBotDiv());
+  render(
+    <Provider store={store}>
+      <ChatContainer/>
+    </Provider>,
+    createSalemoveBotDiv()
+  );
 });

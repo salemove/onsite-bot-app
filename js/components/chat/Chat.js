@@ -1,47 +1,15 @@
 import React from 'react';
-import './chat.css';
 import Messages from './Messages';
+import MessageInput from './MessageInput';
+import './chat.css';
 
-class Chat extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      newMessage: '',
-      messages: []
-    };
-  }
-
-  handleNewMessage(event) {
-    if (event.key === 'Enter') {
-      const visitorMessage = {
-        text: this.state.newMessage,
-        sender: 'visitor'
-      };
-      const newMessages = [...this.state.messages, visitorMessage];
-      this.setState({messages: newMessages, newMessage: ''});
-    }
-  }
-
-  handleChange(event) {
-    this.setState({newMessage: event.target.value});
-  }
-
-  render() {
-    return (
-      <div className="sm-bot-chat">
-        <Messages messages={this.state.messages}/>
-        <div className="sm-bot-chat-input">
-          <input
-            type="text"
-            value={this.state.newMessage}
-            onKeyPress={::this.handleNewMessage}
-            onChange={::this.handleChange}
-          />
-        </div>
-      </div>
-    );
-  }
-}
-
+const Chat = props => {
+  return (
+    <div className="sm-bot-chat">
+      <Messages messages={props.messages}/>
+      <MessageInput onMessageSent={props.onMessageSent}/>
+    </div>
+  );
+};
 
 export default Chat;
