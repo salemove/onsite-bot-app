@@ -1,0 +1,14 @@
+.sm-bot-chat {
+  position: fixed;
+  right: 30px;
+  bottom: 30px;
+  background: white;
+}
+
+.sm-bot-operator-message {
+  text-align: left;
+}
+
+.sm-bot-visitor-message {
+  text-align: right;
+}
