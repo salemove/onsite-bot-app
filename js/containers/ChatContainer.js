@@ -1,5 +1,5 @@
-import Chat from './Chat';
-import {addVisitorMessage} from '../../Actions';
+import Chat from '../components/chat/Chat';
+import {addVisitorMessage} from '../Actions';
 import {connect} from 'react-redux';
 
 const mapStateToProps = state => (

@@ -4,9 +4,12 @@ import {createStore, applyMiddleware} from 'redux'
 import {Provider} from 'react-redux';
 import thunk from 'redux-thunk';
 import reducers from './Reducers';
-import ChatContainer from './components/chat/ChatContainer';
+import ChatContainer from './containers/ChatContainer';
+import Bot from './Bot';
 
 const store = createStore(reducers, applyMiddleware(thunk));
+
+const bot = new Bot(store);
 
 const createSalemoveBotDiv = () => {
   const div = document.createElement('div');

@@ -8,7 +8,7 @@ const initialState = {
 const reducers = (state = initialState, {type, payload}) => {
   switch (type) {
     case ACTION_TYPES.MESSAGE_RECEIVED:
-      return R.merge(state, {messages: [...state.messages, payload]});
+      return {...state, messages: [...state.messages, payload]};
     default:
       return state;
   }
