@@ -3,7 +3,8 @@ import {addMessage} from './Actions';
 const ReduxBot = (Bot, store, salemove) => {
   let prevMessage = null;
   const sendMessage = (message, sender) => store.dispatch(addMessage(message, sender));
-  const bot = new Bot(salemove, sendMessage);
+  const getMessages = () => store.getState().messages;
+  const bot = new Bot(salemove, sendMessage, getMessages);
   const lastOrNull = items => items.length > 0 ? items[items.length - 1] : null;
 
   store.subscribe(() => {

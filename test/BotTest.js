@@ -6,11 +6,13 @@ describe('Bot', () => {
   let salemove;
   let bot;
   let sendMessage;
+  let getMessages;
 
   beforeEach(() => {
     salemove = sinon.stub();
     sendMessage = sinon.stub();
-    bot = new Bot(salemove, sendMessage);
+    getMessages = sinon.stub();
+    bot = new Bot(salemove, sendMessage, getMessages);
   });
 
   describe('#startDialog', () => {
@@ -25,7 +27,8 @@ describe('Bot', () => {
         salemove,
         finish: sinon.match.func,
         startDialog: sinon.match.func,
-        sendMessage: sinon.match.func
+        sendMessage: sinon.match.func,
+        getMessages: sinon.match.func
       });
     });
 

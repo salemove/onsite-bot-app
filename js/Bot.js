@@ -1,12 +1,12 @@
 import {SENDERS} from './Constants';
 import EchoDialog from './dialogs/EchoDialog';
 
-const Bot = (salemove, sendMessage) => {
+const Bot = (salemove, sendMessage, getMessages) => {
   let currentDialog = null;
 
   const startDialog = Dialog => {
     const finish = () => startDialog(EchoDialog);
-    currentDialog = new Dialog({startDialog, salemove, finish, sendMessage});
+    currentDialog = new Dialog({startDialog, salemove, finish, sendMessage, getMessages});
     if (currentDialog.onStart) currentDialog.onStart();
   };
 

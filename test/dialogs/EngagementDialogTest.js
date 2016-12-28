@@ -4,6 +4,7 @@ import memo from 'memo-is';
 
 describe('EngagementDialog', () => {
   let sendMessage;
+  let getMessages;
   let finish;
   let smChat;
   const salemove = memo().is(() => ({
@@ -21,11 +22,12 @@ describe('EngagementDialog', () => {
       sendMessage: sinon.stub()
     };
     sendMessage = sinon.stub();
+    getMessages = sinon.stub()
     finish = sinon.stub();
     salemove().requestEngagement.returns({engagementPromise: engagementPromise()});
 
     EngagementDialog.__Rewire__('SmChat', () => smChat);
-    dialog = new EngagementDialog({salemove: salemove(), finish, sendMessage});
+    dialog = new EngagementDialog({salemove: salemove(), finish, sendMessage, getMessages});
     dialog.onStart();
   });
 
