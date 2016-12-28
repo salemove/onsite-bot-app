@@ -1,5 +1,5 @@
 import {ACTION_TYPES, SENDERS} from '../Constants';
-import {addBotMessage} from '../Actions';
+import {addMessage} from '../Actions';
 import EngagementDialog from './EngagementDialog';
 
 const EchoDialog = context => {
@@ -9,7 +9,7 @@ const EchoDialog = context => {
       if (message.content.includes('engagement')) {
         startDialog(EngagementDialog);
       } else {
-        store.dispatch(addBotMessage(message.content));
+        store.dispatch(addMessage(message.content, SENDERS.BOT));
       }
     }
   }

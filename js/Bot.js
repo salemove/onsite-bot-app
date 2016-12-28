@@ -1,5 +1,4 @@
 import {ACTION_TYPES, SENDERS} from './Constants';
-import {addBotMessage, addOperatorMessage} from './Actions';
 import EchoDialog from './dialogs/EchoDialog';
 
 const lastOrNull = items => items.length > 0 ? items[items.length - 1] : null;

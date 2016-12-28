@@ -1,5 +1,5 @@
 import {ACTION_TYPES, SENDERS} from '../Constants';
-import {addOperatorMessage} from '../Actions';
+import {addMessage} from '../Actions';
 
 const createSmChat = () => {
   const smChat = document.createElement('sm-chat');
@@ -26,7 +26,7 @@ const EngagementDialog = context => {
         createSmChat();
         chat.addEventListener(chat.EVENTS.MESSAGES, messages => {
           if (messages.length > 0 && messages[0].sender === SENDERS.OPERATOR) {
-            store.dispatch(addOperatorMessage(messages[0].content));
+            store.dispatch(addMessage(messages[0].content, SENDERS.OPERATOR));
           }
         });
         engagement.addEventListener(engagement.EVENTS.END, () => {

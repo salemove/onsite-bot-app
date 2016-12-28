@@ -1,5 +1,6 @@
 import Chat from '../components/chat/Chat';
-import {addVisitorMessage} from '../Actions';
+import {addMessage} from '../Actions';
+import {SENDERS} from '../Constants';
 import {connect} from 'react-redux';
 
 const mapStateToProps = state => (
@@ -10,7 +11,7 @@ const mapStateToProps = state => (
 
 const mapDispatchToProps = dispatch => {
   return {
-    onMessageSent: message => dispatch(addVisitorMessage(message))
+    onMessageSent: message => dispatch(addMessage(message, SENDERS.VISITOR))
   };
 };
 
