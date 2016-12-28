@@ -1,4 +1,4 @@
-import {ACTION_TYPES, SENDERS} from './Constants';
+import {ACTION_TYPES} from './Constants';
 
 export const addMessage = (message, sender) => dispatch => {
   const newMessage = {content: message, sender};

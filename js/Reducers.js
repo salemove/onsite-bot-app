@@ -11,7 +11,6 @@ const reducers = (state = initialState, {type, payload}) => {
     default:
       return state;
   }
-  return state;
 };
 
 export default reducers;

@@ -1,5 +1,4 @@
-import {ACTION_TYPES, SENDERS} from '../Constants';
-import {addMessage} from '../Actions';
+import {SENDERS} from '../Constants';
 import EngagementDialog from './EngagementDialog';
 
 const EchoDialog = context => {
@@ -12,7 +11,7 @@ const EchoDialog = context => {
         sendMessage(message.content, SENDERS.BOT);
       }
     }
-  }
+  };
 };
 
 export default EchoDialog;

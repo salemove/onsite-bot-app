@@ -1,5 +1,4 @@
-import {ACTION_TYPES, SENDERS} from '../Constants';
-import {addMessage} from '../Actions';
+import {SENDERS} from '../Constants';
 import SmChat from '../SmChat';
 
 const EngagementDialog = context => {
@@ -55,7 +54,7 @@ const EngagementDialog = context => {
     onMessage: message => {
       if (smChat) smChat.sendMessage(message.content);
     }
-  }
+  };
 };
 
 export default EngagementDialog;

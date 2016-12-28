@@ -4,16 +4,13 @@ import EchoDialog from './dialogs/EchoDialog';
 const Bot = (salemove, sendMessage) => {
   let currentDialog = null;
 
-  const finish = () => {
-    startDialog(EchoDialog);
-  };
-
   const startDialog = Dialog => {
+    const finish = () => startDialog(EchoDialog);
     currentDialog = new Dialog({startDialog, salemove, finish, sendMessage});
     if (currentDialog.onStart) currentDialog.onStart();
   };
 
-  const isVisitorMessage = message => message.sender === SENDERS.VISITOR
+  const isVisitorMessage = message => message.sender === SENDERS.VISITOR;
 
   const onMessage = message => {
     if (isVisitorMessage(message)) currentDialog.onMessage(message);
@@ -22,7 +19,7 @@ const Bot = (salemove, sendMessage) => {
   return {
     startDialog,
     onMessage
-  }
+  };
 };
 
 export default Bot;
