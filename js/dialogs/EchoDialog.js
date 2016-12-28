@@ -3,13 +3,13 @@ import {addMessage} from '../Actions';
 import EngagementDialog from './EngagementDialog';
 
 const EchoDialog = context => {
-  const {store, startDialog} = context;
+  const {startDialog, sendMessage} = context;
   return {
     onMessage: message => {
       if (message.content.includes('engagement')) {
         startDialog(EngagementDialog);
       } else {
-        store.dispatch(addMessage(message.content, SENDERS.BOT));
+        sendMessage(message.content, SENDERS.BOT);
       }
     }
   }

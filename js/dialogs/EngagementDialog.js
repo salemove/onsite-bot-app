@@ -16,7 +16,7 @@ const sendMessageToOperator = message => {
 };
 
 const EngagementDialog = context => {
-  const {store, salemove, finish} = context;
+  const {salemove, sendMessage, finish} = context;
 
   return {
     onStart: () => {
@@ -26,7 +26,7 @@ const EngagementDialog = context => {
         createSmChat();
         chat.addEventListener(chat.EVENTS.MESSAGES, messages => {
           if (messages.length > 0 && messages[0].sender === SENDERS.OPERATOR) {
-            store.dispatch(addMessage(messages[0].content, SENDERS.OPERATOR));
+            sendMessage(messages[0].content, SENDERS.OPERATOR);
           }
         });
         engagement.addEventListener(engagement.EVENTS.END, () => {

@@ -1,11 +1,7 @@
-import {ACTION_TYPES, SENDERS} from './Constants';
+import {SENDERS} from './Constants';
 import EchoDialog from './dialogs/EchoDialog';
 
-const lastOrNull = items => items.length > 0 ? items[items.length - 1] : null;
-
-const Bot = (store, salemove) => {
-  let prevMessage = null;
-  let isEngagement = false;
+const Bot = (salemove, sendMessage) => {
   let currentDialog = null;
 
   const finish = () => {
@@ -13,22 +9,20 @@ const Bot = (store, salemove) => {
   };
 
   const startDialog = Dialog => {
-    currentDialog = new Dialog({store, startDialog, salemove, finish});
+    currentDialog = new Dialog({startDialog, salemove, finish, sendMessage});
     if (currentDialog.onStart) currentDialog.onStart();
   };
 
-  const isNewMessageFromVisitor = newMessage =>
-    newMessage && prevMessage != newMessage && newMessage.sender === SENDERS.VISITOR
+  const isVisitorMessage = message => message.sender === SENDERS.VISITOR
 
-  store.subscribe(() => {
-    const messages = store.getState().messages;
-    const newMessage = lastOrNull(messages);
-    if (isNewMessageFromVisitor(newMessage)) {
-      currentDialog.onMessage(newMessage);
-    }
-  });
+  const onMessage = message => {
+    if (isVisitorMessage(message)) currentDialog.onMessage(message);
+  };
 
-  startDialog(EchoDialog);
+  return {
+    startDialog,
+    onMessage
+  }
 };
 
 export default Bot;
