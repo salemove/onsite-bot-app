@@ -8,5 +8,6 @@ chai.use(sinonChai);
 
 require('babel-register')({
   babelrc: false,
-  presets: ['es2015', 'stage-0', 'react']
+  presets: ['es2015', 'stage-0', 'react'],
+  plugins: ['babel-plugin-rewire']
 });
