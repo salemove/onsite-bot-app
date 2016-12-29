@@ -55,7 +55,8 @@ describe('EngagementDialog', () => {
     const engagement = memo().is(() => ({
       EVENTS: engagementEvents,
       chat: chat(),
-      addEventListener: sinon.stub()
+      addEventListener: sinon.stub(),
+      end: sinon.stub()
     }));
     engagementPromise.is(() => Promise.resolve(engagement()));
 
@@ -111,6 +112,17 @@ describe('EngagementDialog', () => {
 
       it('finishes dialog', () => {
         expect(finish).to.be.called;
+      });
+    });
+
+    context('when Visitor sends stop message', () => {
+      const message = {content: 'stop', sender: SENDERS.VISITOR};
+      beforeEach(() => {
+        dialog.onMessage(message);
+      });
+
+      it('ends the Engagement', () => {
+        expect(engagement().end).to.be.called;
       });
     });
   });

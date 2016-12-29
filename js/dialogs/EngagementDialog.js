@@ -1,9 +1,11 @@
 import {SENDERS} from '../Constants';
 import SmChat from '../SmChat';
+import { Subject } from 'rxjs/Subject';
 
 const EngagementDialog = (context, params) => {
   const {salemove, sendMessage, finish} = context;
   const {operator} = params;
+  const STOP_MESSAGE = 'stop';
   const RESPONSES = {
     OPERATOR_NOT_AVAILABLE: 'Operator is not available',
     NO_OPERATORS_AVAILABLE: 'Sorry, currenly there are no available operators',
@@ -11,7 +13,7 @@ const EngagementDialog = (context, params) => {
     ENGAGEMENT_ENDED: 'Engagement ended',
     WAITING_FOR_OPERATOR: 'Waiting for an operator'
   };
-  let smChat;
+  const messages = new Subject();
 
   const proxyOperatorMessages = chat => {
     const isNewOperatorMessage = messages =>
@@ -22,16 +24,26 @@ const EngagementDialog = (context, params) => {
     });
   };
 
-  const finishDialog = () => {
+  const finishDialog = subscription => () => {
+    subscription.unsubscribe();
     sendMessage(RESPONSES.ENGAGEMENT_ENDED, SENDERS.BOT);
     finish();
+  };
+
+  const processMessage = (engagement, chat) => message => {
+    if (message.content === STOP_MESSAGE) {
+      engagement.end();
+    } else {
+      chat.sendMessage(message.content);
+    }
   };
 
   const setupEngagement = engagement => {
     sendMessage(RESPONSES.ENGAGEMENT_STARTED, SENDERS.BOT);
     proxyOperatorMessages(engagement.chat);
-    engagement.addEventListener(engagement.EVENTS.END, finishDialog);
-    smChat = new SmChat(engagement.chat);
+    const smChat = new SmChat(engagement.chat);
+    const subscription = messages.subscribe(processMessage(engagement, smChat));
+    engagement.addEventListener(engagement.EVENTS.END, finishDialog(subscription));
   };
 
   const processError = error => {
@@ -53,9 +65,7 @@ const EngagementDialog = (context, params) => {
         .then(setupEngagement)
         .catch(processError);
     },
-    onMessage: message => {
-      if (smChat) smChat.sendMessage(message.content);
-    }
+    onMessage: ::messages.next
   };
 };
 
