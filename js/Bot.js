@@ -1,22 +1,45 @@
 import {SENDERS} from './Constants';
-import EchoDialog from './dialogs/EchoDialog';
+import R from 'ramda';
 
 const Bot = (salemove, sendMessage, getMessages) => {
-  let currentDialog = null;
+  const dialogs = [];
+  const goBack = () => {
+    dialogs.pop();
+  };
 
-  const startDialog = Dialog => {
-    const finish = () => startDialog(EchoDialog);
-    currentDialog = new Dialog({startDialog, salemove, finish, sendMessage, getMessages});
-    if (currentDialog.onStart) currentDialog.onStart();
+  const startDialogForResult = (Dialog, params = {}) => {
+    return new Promise((resolve, reject) => {
+      const finishWithResult = result => {
+        goBack();
+        resolve(result);
+      };
+      const finish = error => {
+        goBack();
+        reject(error);
+      };
+      const context = {salemove, finish, finishWithResult, sendMessage, getMessages};
+      const dialog = new Dialog(context, params);
+      dialogs.push(dialog);
+      if (dialog.onStart) dialog.onStart();
+    });
+  };
+
+  const startDialog = (Dialog, params = {}) => {
+    const finish = goBack;
+    const context = {startDialog, startDialogForResult, salemove, finish, sendMessage, getMessages};
+    const dialog = new Dialog(context, params);
+    dialogs.push(dialog);
+    if (dialog.onStart) dialog.onStart();
   };
 
   const isVisitorMessage = message => message.sender === SENDERS.VISITOR;
 
   const onMessage = message => {
-    if (isVisitorMessage(message)) currentDialog.onMessage(message);
+    if (isVisitorMessage(message)) R.last(dialogs).onMessage(message);
   };
 
   return {
+    startDialogForResult,
     startDialog,
     onMessage
   };

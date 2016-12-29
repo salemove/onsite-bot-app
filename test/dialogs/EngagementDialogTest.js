@@ -7,6 +7,7 @@ describe('EngagementDialog', () => {
   let getMessages;
   let finish;
   let smChat;
+  const params = memo().is(() => ({}));
   const salemove = memo().is(() => ({
     ERRORS: {
       OPERATOR_DECLINED: 'operator_declined',
@@ -27,12 +28,21 @@ describe('EngagementDialog', () => {
     salemove().requestEngagement.returns({engagementPromise: engagementPromise()});
 
     EngagementDialog.__Rewire__('SmChat', () => smChat);
-    dialog = new EngagementDialog({salemove: salemove(), finish, sendMessage, getMessages});
+    dialog = new EngagementDialog({salemove: salemove(), finish, sendMessage, getMessages}, params());
     dialog.onStart();
   });
 
+
   it('requests text Engagement', () => {
     expect(salemove().requestEngagement).to.be.calledWith('text');
+  });
+
+  context('when Operator provided', () => {
+    const operator = {name: 'El', id: 1};
+    params.is(() => ({operator}));
+    it('requests text Engagement with Operator', () => {
+      expect(salemove().requestEngagement).to.be.calledWith('text', {operatorId: operator.id});
+    });
   });
 
   context('when Engagement accepted', () => {

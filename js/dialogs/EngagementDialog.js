@@ -1,8 +1,9 @@
 import {SENDERS} from '../Constants';
 import SmChat from '../SmChat';
 
-const EngagementDialog = context => {
+const EngagementDialog = (context, params) => {
   const {salemove, sendMessage, finish} = context;
+  const {operator} = params;
   const RESPONSES = {
     OPERATOR_NOT_AVAILABLE: 'Operator is not available',
     NO_OPERATORS_AVAILABLE: 'Sorry, currenly there are no available operators',
@@ -45,7 +46,8 @@ const EngagementDialog = context => {
   return {
     RESPONSES,
     onStart: () => {
-      const engagementRequest = salemove.requestEngagement('text');
+      const options = operator ? {operatorId: operator.id} : null;
+      const engagementRequest = salemove.requestEngagement('text', options);
       sendMessage(RESPONSES.WAITING_FOR_OPERATOR, SENDERS.BOT);
       engagementRequest.engagementPromise
         .then(setupEngagement)
