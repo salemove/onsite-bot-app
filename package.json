@@ -40,5 +40,5 @@
     "start": "webpack-dev-server --debug --devtool",
     "test": "mocha",
     "lint": "eslint js test"
-  },
+  }
 }
