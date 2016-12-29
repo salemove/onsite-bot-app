@@ -1,12 +1,12 @@
 import React from 'react';
-import Messages from './Messages';
+import MessageList from './MessageList';
 import MessageInput from './MessageInput';
 import './chat.css';
 
 const Chat = props => {
   return (
     <div className="sm-bot-chat">
-      <Messages messages={props.messages}/>
+      <MessageList messages={props.messages}/>
       <MessageInput onMessageSent={props.onMessageSent}/>
     </div>
   );

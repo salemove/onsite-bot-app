@@ -7,7 +7,7 @@ class MessageInput extends React.Component {
   }
 
   handleKeyPress(event) {
-    if (event.key === 'Enter') {
+    if (event.key === 'Enter' && this.state.inputValue !== '') {
       this.props.onMessageSent(this.state.inputValue);
       this.setState({inputValue: ''});
     }
@@ -25,6 +25,7 @@ class MessageInput extends React.Component {
           value={this.state.inputValue}
           onKeyPress={::this.handleKeyPress}
           onChange={::this.handleChange}
+          placeholder="Type message"
         />
       </div>
     );

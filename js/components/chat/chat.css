@@ -3,24 +3,73 @@
   right: 30px;
   bottom: 30px;
   background: white;
+  border-radius: 30px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 10px 30px 0 rgba(0, 0, 0, 0.2);
+  height: 400px;
+  width: 300px;
+  padding: 30px 22px 22px;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-.sm-bot-bot-message {
-  text-align: left;
+.sm-bot-chat-messages {
+  height: 380px;
+  overflow-y: scroll;
 }
 
-.sm-bot-bot-message::before {
-  content: 'bot: ';
+.sm-bot-message {
+  padding: 5px 0px;
 }
 
-.sm-bot-operator-message {
-  text-align: left;
+.sm-bot-message-content {
+  padding: 10px 17px;
+  border-radius: 17px;
+  display: inline-block;
 }
 
-.sm-bot-operator-message::before {
-  content: 'operator: ';
+.sm-bot-bot-message-content, .sm-bot-operator-message-content {
+  background: #53a0fd;
+  color: white;
+  position: relative;
 }
 
 .sm-bot-visitor-message {
   text-align: right;
+}
+
+.sm-bot-visitor-message-content {
+  background: #e0e0e0;
+  position: relative;
+}
+
+.sm-bot-message-content::before {
+  position: absolute;
+  content: "";
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 13px solid;
+}
+
+.sm-bot-bot-message-content::before, .sm-bot-operator-message-content::before {
+  bottom: -7px;
+  left: -1px;
+  border-top-color: #53a0fd;
+  -webkit-transform: rotate(40deg);
+  transform: rotate(40deg);
+}
+
+.sm-bot-visitor-message-content::before {
+  bottom: -7px;
+  right: -1px;
+  border-top-color: #e0e0e0;
+  -webkit-transform: rotate(-40deg);
+  transform: rotate(-40deg);
+}
+
+.sm-bot-chat-input > input {
+  font-size: 14px;
+  height: 35px;
+  width: 100%;
+  border: none;
 }
