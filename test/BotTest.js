@@ -34,44 +34,32 @@ describe('Bot', () => {
     });
 
     context('when dialog has onStart defined', () => {
-      const onStart = memo().is(() => sinon.stub())
+      const onStart = memo().is(() => sinon.stub());
       dialog.is(() => () => ({
         onStart: onStart()
       }));
 
       it('triggers dialog start event', () => {
-        expect(onStart()).to.be.calledOnce
+        expect(onStart()).to.be.calledOnce;
       });
     });
-
-    const sendMessageFrom = (sender) => {
-      const message = {content: 'Hello', sender: SENDERS.VISITOR};
-      const onMessage= memo().is(() => sinon.stub())
-      dialog.is(() => () => ({
-        onMessage: onMessage()
-      }));
-
-      beforeEach(() => {
-        bot.onMessage(message)
-      });
-    };
 
     context('when message received', () => {
       const sender = memo().is(() => null);
       const message = memo().is(() => ({content: 'Hello', sender: sender()}));
-      const onMessage= memo().is(() => sinon.stub())
+      const onMessage = memo().is(() => sinon.stub());
       dialog.is(() => () => ({
         onMessage: onMessage()
       }));
 
       beforeEach(() => {
-        bot.onMessage(message())
+        bot.onMessage(message());
       });
 
       context('from Visitor', () => {
         sender.is(() => SENDERS.VISITOR);
         it('routes message to current dialog', () => {
-          expect(onMessage()).to.be.calledWith(message())
+          expect(onMessage()).to.be.calledWith(message());
         });
       });
 

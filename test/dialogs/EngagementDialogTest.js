@@ -23,7 +23,7 @@ describe('EngagementDialog', () => {
       sendMessage: sinon.stub()
     };
     sendMessage = sinon.stub();
-    getMessages = sinon.stub()
+    getMessages = sinon.stub();
     finish = sinon.stub();
     salemove().requestEngagement.returns({engagementPromise: engagementPromise()});
 
@@ -31,7 +31,6 @@ describe('EngagementDialog', () => {
     dialog = new EngagementDialog({salemove: salemove(), finish, sendMessage, getMessages}, params());
     dialog.onStart();
   });
-
 
   it('requests text Engagement', () => {
     expect(salemove().requestEngagement).to.be.calledWith('text');
@@ -66,8 +65,8 @@ describe('EngagementDialog', () => {
 
     const triggerChatMessagesEvent = message => chat.is(() => {
       const addEventListener = sinon.stub();
-      addEventListener.withArgs(chatEvents.MESSAGES).callsArgWith(1, [message])
-      return {EVENTS: chatEvents, addEventListener}
+      addEventListener.withArgs(chatEvents.MESSAGES).callsArgWith(1, [message]);
+      return {EVENTS: chatEvents, addEventListener};
     });
 
     context('when Operator message received from API', () => {

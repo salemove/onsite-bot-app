@@ -6,7 +6,7 @@
   "scripts": {
     "start": "webpack-dev-server --debug --devtool",
     "test": "mocha",
-    "lint": "eslint js"
+    "lint": "eslint js test"
   },
   "author": "SaleMove",
   "devDependencies": {

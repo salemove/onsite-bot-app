@@ -23,10 +23,10 @@ describe('EchoDialog', () => {
     const message = memo().is(() => ({content: 'Hello', sender: SENDERS.VISITOR}));
 
     beforeEach(() => {
-      dialog.onMessage(message())
+      dialog.onMessage(message());
     });
 
-    it ('send the same message as Bot', () => {
+    it('send the same message as Bot', () => {
       expect(sendMessage).to.be.calledWith(message().content, SENDERS.BOT);
     });
 

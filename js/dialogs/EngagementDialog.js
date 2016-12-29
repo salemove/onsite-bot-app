@@ -1,6 +1,6 @@
 import {SENDERS} from '../Constants';
 import SmChat from '../SmChat';
-import { Subject } from 'rxjs/Subject';
+import {Subject} from 'rxjs/Subject';
 
 const EngagementDialog = (context, params) => {
   const {salemove, sendMessage, finish} = context;
