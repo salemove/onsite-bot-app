@@ -24,12 +24,17 @@
   padding: 10px 17px;
   border-radius: 17px;
   display: inline-block;
+  position: relative;
 }
 
-.sm-bot-bot-message-content, .sm-bot-operator-message-content {
+.sm-bot-operator-message-content {
   background: #53a0fd;
   color: white;
-  position: relative;
+}
+
+.sm-bot-bot-message-content {
+  background: #00796B;
+  color: white;
 }
 
 .sm-bot-visitor-message {
@@ -51,10 +56,18 @@
   border-top: 13px solid;
 }
 
-.sm-bot-bot-message-content::before, .sm-bot-operator-message-content::before {
+.sm-bot-operator-message-content::before {
   bottom: -7px;
   left: -1px;
   border-top-color: #53a0fd;
+  -webkit-transform: rotate(40deg);
+  transform: rotate(40deg);
+}
+
+.sm-bot-bot-message-content::before {
+  bottom: -7px;
+  left: -1px;
+  border-top-color: #00796B;
   -webkit-transform: rotate(40deg);
   transform: rotate(40deg);
 }

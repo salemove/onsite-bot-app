@@ -4,6 +4,7 @@ import memo from 'memo-is';
 
 describe('EngagementDialog', () => {
   let sendMessage;
+  let startDialogForResult;
   let getMessages;
   let finish;
   let smChat;
@@ -17,6 +18,7 @@ describe('EngagementDialog', () => {
   }));
   let dialog;
   const engagementPromise = memo().is(() => Promise.reject());
+  const engagementStopPromise = memo().is(() => Promise.reject());
 
   beforeEach(() => {
     smChat = {
@@ -24,11 +26,13 @@ describe('EngagementDialog', () => {
     };
     sendMessage = sinon.stub();
     getMessages = sinon.stub();
+    startDialogForResult = sinon.stub().returns(engagementStopPromise());
     finish = sinon.stub();
     salemove().requestEngagement.returns({engagementPromise: engagementPromise()});
 
     EngagementDialog.__Rewire__('SmChat', () => smChat);
-    dialog = new EngagementDialog({salemove: salemove(), finish, sendMessage, getMessages}, params());
+    const context = {salemove: salemove(), finish, sendMessage, getMessages, startDialogForResult};
+    dialog = new EngagementDialog(context, params());
     dialog.onStart();
   });
 
@@ -120,8 +124,16 @@ describe('EngagementDialog', () => {
         dialog.onMessage(message);
       });
 
-      it('ends the Engagement', () => {
-        expect(engagement().end).to.be.called;
+      it('starts StopEngagementDialog for result', () => {
+        expect(startDialogForResult).to.be.called;
+      });
+
+      context('when StopEngagementDialog finishes with confirmation', () => {
+        engagementStopPromise.is(() => Promise.resolve(true));
+
+        it('end the Engagement', () => {
+          expect(engagement().end).to.be.called;
+        });
       });
     });
   });

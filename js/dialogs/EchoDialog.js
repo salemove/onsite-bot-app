@@ -6,7 +6,7 @@ const EchoDialog = context => {
   const {startDialogForResult, startDialog, sendMessage} = context;
   return {
     onMessage: message => {
-      if (message.content.includes('engagement')) {
+      if (message.content.toLowerCase().includes('engagement')) {
         startDialogForResult(OperatorSelectorDialog).then(operator => {
           startDialog(EngagementDialog, {operator});
         }).catch(() => {

@@ -1,9 +1,10 @@
 import {SENDERS} from '../Constants';
 import SmChat from '../SmChat';
 import {Subject} from 'rxjs/Subject';
+import StopEngagementDialog from './StopEngagementDialog';
 
 const EngagementDialog = (context, params) => {
-  const {salemove, sendMessage, finish} = context;
+  const {salemove, sendMessage, finish, startDialogForResult} = context;
   const {operator} = params;
   const STOP_MESSAGE = 'stop';
   const RESPONSES = {
@@ -31,8 +32,10 @@ const EngagementDialog = (context, params) => {
   };
 
   const processMessage = (engagement, chat) => message => {
-    if (message.content === STOP_MESSAGE) {
-      engagement.end();
+    if (message.content.toLowerCase() === STOP_MESSAGE) {
+      startDialogForResult(StopEngagementDialog).then(confirmed => {
+        if (confirmed) engagement.end();
+      });
     } else {
       chat.sendMessage(message.content);
     }
