@@ -37,7 +37,7 @@ const OperatorSelectorDialog = context => {
       availableOperators = operators.filter(availableOperator);
       if (availableOperators.length > 1) {
         sendMessage(operatorsToText(availableOperators), SENDERS.BOT);
-        sendMessage(RESPONSES.SELECT_OPERATOR);
+        sendMessage(RESPONSES.SELECT_OPERATOR, SENDERS.BOT);
       } else if (availableOperators.length === 1) {
         finishWithResult(availableOperators[0]);
       } else {
