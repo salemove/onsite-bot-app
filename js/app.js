@@ -7,7 +7,7 @@ import reducers from './Reducers';
 import ChatContainer from './containers/ChatContainer';
 import Bot from './Bot';
 import ReduxBot from './ReduxBot';
-import EchoDialog from './dialogs/EchoDialog';
+import ApiAiDialog from './dialogs/ApiAiDialog';
 
 const store = createStore(reducers, applyMiddleware(thunk));
 
@@ -21,7 +21,7 @@ const createSalemoveBotDiv = () => {
 
 sm.getApi({version: 'v1'}).then(salemove => {
   const bot = new ReduxBot(Bot, store, salemove);
-  bot.startDialog(EchoDialog);
+  bot.startDialog(ApiAiDialog);
 
   render(
     <Provider store={store}>
