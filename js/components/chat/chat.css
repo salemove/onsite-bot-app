@@ -67,9 +67,17 @@
   transform: rotate(-40deg);
 }
 
+.sm-bot-chat-input {
+  border-top: 1px solid #c8c8c8;
+}
+
 .sm-bot-chat-input > input {
   font-size: 14px;
   height: 35px;
   width: 100%;
   border: none;
+}
+
+.sm-bot-chat-input > input:focus {
+  outline: none;
 }
