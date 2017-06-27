@@ -1,5 +1,4 @@
 import {SENDERS} from '../Constants';
-import SmChat from '../SmChat';
 import {Subject} from 'rxjs/Subject';
 import StopEngagementDialog from './StopEngagementDialog';
 import createLogger from '../Logger';
@@ -47,8 +46,7 @@ const EngagementDialog = (context, params) => {
   const setupEngagement = engagement => {
     sendMessage(RESPONSES.ENGAGEMENT_STARTED, SENDERS.BOT);
     proxyOperatorMessages(engagement.chat);
-    const smChat = new SmChat(engagement.chat);
-    const subscription = messages.subscribe(processMessage(engagement, smChat), logger.error);
+    const subscription = messages.subscribe(processMessage(engagement, engagement.chat), logger.error);
     engagement.addEventListener(engagement.EVENTS.END, finishDialog(subscription));
   };
 

@@ -7,7 +7,6 @@ describe('EngagementDialog', () => {
   let startDialogForResult;
   let getMessages;
   let finish;
-  let smChat;
   const params = memo().is(() => ({}));
   const salemove = memo().is(() => ({
     ERRORS: {
@@ -21,16 +20,12 @@ describe('EngagementDialog', () => {
   const engagementStopPromise = memo().is(() => Promise.reject());
 
   beforeEach(() => {
-    smChat = {
-      sendMessage: sinon.stub()
-    };
     sendMessage = sinon.stub();
     getMessages = sinon.stub();
     startDialogForResult = sinon.stub().returns(engagementStopPromise());
     finish = sinon.stub();
     salemove().requestEngagement.returns({engagementPromise: engagementPromise()});
 
-    EngagementDialog.__Rewire__('SmChat', () => smChat);
     const context = {salemove: salemove(), finish, sendMessage, getMessages, startDialogForResult};
     dialog = new EngagementDialog(context, params());
     dialog.onStart();
@@ -53,7 +48,8 @@ describe('EngagementDialog', () => {
     const engagementEvents = {END: 'end'};
     const chat = memo().is(() => ({
       EVENTS: chatEvents,
-      addEventListener: sinon.stub()
+      addEventListener: sinon.stub(),
+      sendMessage: sinon.stub()
     }));
     const engagement = memo().is(() => ({
       EVENTS: engagementEvents,
@@ -98,7 +94,7 @@ describe('EngagementDialog', () => {
       });
 
       it('sends message to Operator', () => {
-        expect(smChat.sendMessage).to.be.calledWith(message.content);
+        expect(chat().sendMessage).to.be.calledWith(message.content);
       });
     });
 
