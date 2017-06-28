@@ -1,7 +1,16 @@
 # Onsite Engagement Bot
 
-Onsite chat bot that can seamlessly switch to an Engagement with an Operator
-in case visitor needs more advanced human help.
+Onsite chat bot that uses SaleMove JS API to seamlessly switch from a conversation with a bot to an Engagement with an
+Operator in the case Visitor needs more advanced human help.
+
+To get more information about SaleMove and our API visit:
+
+* SaleMove web site - https://salemove.com
+* JS API Documentation - https://js-sdk-docs.salemove.com
+* REST API Documentation - http://developer.salemove.com
+
+
+To get information on how to get access to the platform and require access keys, please, contact your account manager.
 
 # Demo
 
