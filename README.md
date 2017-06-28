@@ -3,6 +3,14 @@
 Onsite chat bot that can seamlessly switch to an Engagement with an Operator
 in case visitor needs more advanced human help.
 
+# Versions
+
+There are two versions of the bot:
+
+1. Echo - just echoes all user messages. This is a default version available at `master` branch.
+2. Api.ai - uses api.ai [REST API](https://docs.api.ai/docs/reference) for bot replies. Checkout `integrate-api-ai` branch for this version.
+Register and get your access key at https://api.ai to be able to have a more complex integration with this service.
+
 ## Starting for local development
 
 `> npm install`
