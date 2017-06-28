@@ -14,7 +14,7 @@ To get information on how to get access to the platform and require access keys,
 
 If you intend to only host this example on your local dev machine, the account manager will provide you a unique localhost name with format `<unique-id>.local.dev`.
 This hostname will be used to access and run this example application.
-See [Starting for local development](starting-for-local-development) below for an example of using this hostname with nginx.
+See [Starting for local development](#starting-for-local-development) below for an example of using this hostname with nginx.
 
 If you already have a hostname that resolves to your local development machine or target deployment machine, please provide that to the account manager.
 
