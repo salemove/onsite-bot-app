@@ -5,7 +5,7 @@ in case visitor needs more advanced human help.
 
 # Demo
 
-![SaleMove Onsite Bot demo](https://github.com/salemove/onsite-bot-app/raw/master/demo.gif)
+<img src="https://github.com/salemove/onsite-bot-app/raw/master/demo.gif" alt="SaleMove Onsite Bot demo" width="350">
 
 # Versions
 
