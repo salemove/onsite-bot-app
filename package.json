@@ -1,12 +1,13 @@
 {
   "name": "onsite-bot",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Onsite Engagement Bot",
-  "main": "js/app.js",
+  "main": "dist/app.js",
   "scripts": {
     "start": "webpack-dev-server --debug --devtool",
     "test": "mocha",
-    "lint": "eslint js test"
+    "lint": "eslint js test",
+    "build": "webpack --config webpack.production.config.js --progress"
   },
   "author": "SaleMove",
   "devDependencies": {
