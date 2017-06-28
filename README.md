@@ -3,6 +3,10 @@
 Onsite chat bot that can seamlessly switch to an Engagement with an Operator
 in case visitor needs more advanced human help.
 
+# Demo
+
+![SaleMove Onsite Bot demo](https://github.com/salemove/onsite-bot-app/raw/master/demo.gif)
+
 # Versions
 
 There are two versions of the bot:
