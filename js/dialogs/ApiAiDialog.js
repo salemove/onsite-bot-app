@@ -2,7 +2,7 @@ import {SENDERS} from '../Constants';
 import OperatorSelectorDialog from './OperatorSelectorDialog';
 import EngagementDialog from './EngagementDialog';
 
-const accessToken = "4d2d89463b904a57aaf8d4f92ee6914f";
+const accessToken = "15c1d57dfe314500abac3deecccc04da";
 const baseUrl = "https://api.api.ai/v1/query?v=20150910";
 
 const sendMessageToAiBot = message => {
