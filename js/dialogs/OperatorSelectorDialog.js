@@ -31,9 +31,13 @@ const OperatorSelectorDialog = context => {
   };
 
   const availableOperator = operator => operator.state.available;
+
   const offerOperators = () => {
-    salemove.addEventListener(salemove.EVENTS.OPERATOR_LIST_UPDATE, operators => {
+    salemove.addEventListener(salemove.EVENTS.OPERATOR_LIST_UPDATE, function onOperatorListReceived(operators) {
       if (availableOperators) return;
+
+      salemove.removeEventListener(salemove.EVENTS.OPERATOR_LIST_UPDATE, onOperatorListReceived);
+
       availableOperators = operators.filter(availableOperator);
       if (availableOperators.length > 1) {
         sendMessage(operatorsToText(availableOperators), SENDERS.BOT);

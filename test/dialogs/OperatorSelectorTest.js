@@ -28,10 +28,12 @@ describe('OperatorSelectorDialog', () => {
   const mockAvailableOperators = operators => {
     salemove.is(() => {
       const addEventListener = sinon.stub();
+      const removeEventListener = sinon.stub();
       addEventListener.withArgs(EVENTS.OPERATOR_LIST_UPDATE).callsArgWith(1, operators);
       return {
         EVENTS,
-        addEventListener
+        addEventListener,
+        removeEventListener
       };
     });
   };
@@ -43,6 +45,10 @@ describe('OperatorSelectorDialog', () => {
     it('offers Operators to Visitor', () => {
       expect(sendMessage()).to.be.calledWith('El and Mike are available', SENDERS.BOT);
       expect(sendMessage()).to.be.calledWith(dialog.RESPONSES.SELECT_OPERATOR);
+    });
+
+    it('removes listener after operator list received', () => {
+      expect(salemove().removeEventListener).to.be.calledWith(EVENTS.OPERATOR_LIST_UPDATE, sinon.match.func);
     });
 
     context('when Visitor response contains Operator name', () => {
