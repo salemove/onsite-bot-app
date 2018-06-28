@@ -1,3 +1,5 @@
+const PORT = Number(process.env.PORT) || 8080;
+
 module.exports = {
   mode: 'development',
   entry: "./js/app.js",
@@ -24,7 +26,7 @@ module.exports = {
   },
   devServer: {
     host: '0.0.0.0',
-    port: 3009,
+    port: PORT,
     allowedHosts: [
       '.test',
       '.localhost',
