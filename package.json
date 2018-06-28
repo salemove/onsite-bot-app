@@ -6,6 +6,7 @@
   "scripts": {
     "start": "webpack-dev-server --debug --devtool source-map --output-pathinfo",
     "test": "mocha",
+    "pretest": "npm run lint",
     "lint": "eslint js test",
     "build": "webpack --config webpack.production.config.js --progress"
   },
