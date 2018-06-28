@@ -1,6 +1,7 @@
 const createLoggerLevel = (level, prefix) => {
   return (...args) => {
-    console[level].apply(console, [`[${prefix}]`, ...args]);
+    const prefixedArgs = [`[${prefix}]`, ...args];
+    console[level].apply(console, prefixedArgs);
   };
 };
 
