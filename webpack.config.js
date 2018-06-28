@@ -24,6 +24,12 @@ module.exports = {
   },
   devServer: {
     host: '0.0.0.0',
-    port: 3009
+    port: 3009,
+    allowedHosts: [
+      '.test',
+      '.localhost',
+      '.invalid',
+      '.example'
+    ]
   }
 }
