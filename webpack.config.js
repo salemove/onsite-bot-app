@@ -1,16 +1,21 @@
+const PORT = Number(process.env.PORT) || 8080;
+
 module.exports = {
+  mode: 'development',
   entry: "./js/app.js",
   output: {
     filename: "bundle.js"
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: "babel-loader",
-        query: {
-          presets: ['es2015', 'stage-0', 'react']
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['es2015', 'stage-0', 'react']
+          }
         }
       },
       {
@@ -21,6 +26,12 @@ module.exports = {
   },
   devServer: {
     host: '0.0.0.0',
-    port: 3009
+    port: PORT,
+    allowedHosts: [
+      '.test',
+      '.localhost',
+      '.invalid',
+      '.example'
+    ]
   }
 }

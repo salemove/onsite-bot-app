@@ -1,17 +1,22 @@
+const path = require('path');
+
 module.exports = {
+  mode: 'production',
   entry: "./js/app.js",
   output: {
-    path: 'dist',
+    path: path.join(__dirname, 'dist'),
     filename: "app.js"
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: "babel-loader",
-        query: {
-          presets: ['es2015', 'stage-0', 'react']
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['es2015', 'stage-0', 'react']
+          }
         }
       },
       {
