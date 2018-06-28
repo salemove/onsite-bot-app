@@ -1,16 +1,19 @@
 module.exports = {
+  mode: 'development',
   entry: "./js/app.js",
   output: {
     filename: "bundle.js"
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: "babel-loader",
-        query: {
-          presets: ['es2015', 'stage-0', 'react']
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['es2015', 'stage-0', 'react']
+          }
         }
       },
       {
